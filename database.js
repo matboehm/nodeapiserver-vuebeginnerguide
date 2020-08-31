@@ -2,8 +2,14 @@ const sqlite3 = require('sqlite3').verbose();
 const md5 = require('md5');
 
 const DB_SOURCE = 'db.profile.sqlite';
+const DB_SOURCE_TEST = 'db.test.profile.sqlite';
 
-let db = new sqlite3.Database(DB_SOURCE, (error) => {
+let dbSource = DB_SOURCE;
+if (process.env.NODE_ENV === 'test') {
+    dbSource = DB_SOURCE_TEST;
+}
+
+let db = new sqlite3.Database(dbSource, (error) => {
     if (error) {
         console.error(error);
         throw error;

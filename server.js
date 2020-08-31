@@ -147,3 +147,5 @@ app.delete('/profile/:id', (request, response, next) => {
 app.use((request, response) => {
     response.status(404);
 });
+
+module.exports = app;
