@@ -1,4 +1,5 @@
 const express = require('express');
+const db = require('./database.js');
 
 // Server port
 const HTTP_PORT = 3000;
@@ -15,6 +16,22 @@ app.listen(HTTP_PORT, () => {
 app.get('/', (request, response, next) => {
     response.json({message: 'Ok'});
 });
+
+app.get('/profile', (request, response, next) => {
+    let sql = 'SELECT * FROM profile';
+    let params = [];
+    db.all(sql, params, (error, rows) => {
+        if (error) {
+            response.status(400).json({error: error.message});
+        }
+
+        response.json({
+            message: 'success',
+            data: rows
+        });
+    });
+});
+
 
 // Register other API endpoints here
 
