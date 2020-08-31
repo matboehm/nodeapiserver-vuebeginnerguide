@@ -21,8 +21,8 @@ let db = new sqlite3.Database(DB_SOURCE, (error) => {
     )`,
     (error) => {
         // db already exists
-        let insert = 'INSERT INTO profile (firstname, lastname, gender, bio, age) VALUES (?,?,?,?,?)';
-        db.run(insert, ['Hans', 'Peter', 'male', 'biography text', 44]);
+        // let insert = 'INSERT INTO profile (firstname, lastname, gender, bio, age) VALUES (?,?,?,?,?)';
+        // db.run(insert, ['Hans', 'Peter', 'male', 'biography text', 44]);
     });
 });
 

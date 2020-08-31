@@ -96,6 +96,53 @@ app.post('/profile', (request, response, next) => {
     });
 });
 
+app.patch('/profile/:id', (request, response, next) => {
+    let data = {
+        firstname: request.body.firstname,
+        lastname: request.body.lastname,
+        gender: request.body.gender,
+        bio: request.body.bio,
+        age: request.body.age
+      };
+
+    let sql = `UPDATE profile SET
+        firstname = COALESCE(?,firstname),
+        lastname = COALESCE(?,lastname),
+        gender = COALESCE(?,gender),
+        bio = COALESCE(?,bio),
+        age = COALESCE(?,age)
+        WHERE id = ?`;
+
+        let params = [data.firstname, data.lastname, data.gender, data.bio, data.age, request.params.id];
+
+        db.run(sql, params, (error, result) => {
+            if (error) {
+                response.status(400).json({message: error.message});
+                return;
+            }
+            console.log(result);
+
+            response.json({
+                message: 'success',
+                data: data,
+                changes: this.changes
+            });
+        });
+});
+
+app.delete('/profile/:id', (request, response, next) => {
+    let sql = 'DELETE FROM profile WHERE id = ?';
+
+    db.run(sql, [request.params.id], (error, row) => {
+        if (error) {
+            response.status(400).json({error: error.message});
+            return;
+        }
+
+        response.json({"message":"deleted", changes: this.changes})
+    });
+});
+
 // Default response for other requests - error 404
 app.use((request, response) => {
     response.status(404);
