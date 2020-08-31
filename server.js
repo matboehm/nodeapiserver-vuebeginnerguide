@@ -32,6 +32,35 @@ app.get('/profile', (request, response, next) => {
     });
 });
 
+app.get('/profile/:name', (request, response, next) => {
+    let sql = 'SELECT * FROM profile WHERE firstname = ?';
+    let params = [request.params.name];
+    db.get(sql, params, (error, row) => {
+        if (error) {
+            response.status(400).json({error: error.message});
+        }
+
+        response.json({
+            message: 'success',
+            data: row
+        });
+    });
+});
+
+// app.post('/profile', (request, response, next) => {
+//     let sql = 'SELECT * FROM profile WHERE firstname = ?';
+//     let params = [request.params.name];
+//     db.get(sql, params, (error, row) => {
+//         if (error) {
+//             response.status(400).json({error: error.message});
+//         }
+
+//         response.json({
+//             message: 'success',
+//             data: row
+//         });
+//     });
+// });
 
 // Register other API endpoints here
 
