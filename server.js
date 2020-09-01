@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./database.js');
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
+const cors = require('cors')
 
 // Server port
 const HTTP_PORT = 3000;
@@ -12,6 +13,9 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// enable CORS for all routes
+app.use(cors())
+
 // Start server
 app.listen(HTTP_PORT, () => {
     console.log(`Server running on port ${HTTP_PORT}`);
@@ -19,7 +23,7 @@ app.listen(HTTP_PORT, () => {
 
 // Root endpoint
 app.get('/', (request, response, next) => {
-    response.json({message: 'Ok'});
+    response.json({ message: 'Ok' });
 });
 
 app.get('/profile', (request, response, next) => {
@@ -27,7 +31,7 @@ app.get('/profile', (request, response, next) => {
     let params = [];
     db.all(sql, params, (error, rows) => {
         if (error) {
-            response.status(400).json({error: error.message});
+            response.status(400).json({ error: error.message });
             return;
         }
 
@@ -43,7 +47,7 @@ app.get('/profile/:id', (request, response, next) => {
     let params = [request.params.id];
     db.get(sql, params, (error, row) => {
         if (error) {
-            response.status(400).json({error: error.message});
+            response.status(400).json({ error: error.message });
             return;
         }
 
@@ -59,32 +63,32 @@ app.post('/profile', (request, response, next) => {
     let errors = [];
     console.log(request.body);
 
-    if (!request.body.firstname){
+    if (!request.body.firstname) {
         errors.push("No first name specified");
     }
 
-    if (!request.body.lastname){
+    if (!request.body.lastname) {
         errors.push("No last name specified");
     }
 
-    if (errors.length){
-        response.status(400).json({"error":errors.join(",")});
+    if (errors.length) {
+        response.status(400).json({ "error": errors.join(",") });
         return;
     }
 
     let data = {
-      firstname: request.body.firstname,
-      lastname: request.body.lastname,
-      gender: request.body.gender,
-      bio: request.body.bio,
-      age: request.body.age
+        firstname: request.body.firstname,
+        lastname: request.body.lastname,
+        gender: request.body.gender,
+        bio: request.body.bio,
+        age: request.body.age
     };
 
     let sql = 'INSERT INTO profile (firstname, lastname, gender, bio, age) VALUES (?,?,?,?,?)';
     let params = [data.firstname, data.lastname, data.gender, data.bio, data.age];
     db.run(sql, params, (error, result) => {
         if (error) {
-            response.status(400).json({error: error.message});
+            response.status(400).json({ error: error.message });
             return;
         }
 
@@ -103,7 +107,7 @@ app.patch('/profile/:id', (request, response, next) => {
         gender: request.body.gender,
         bio: request.body.bio,
         age: request.body.age
-      };
+    };
 
     let sql = `UPDATE profile SET
         firstname = COALESCE(?,firstname),
@@ -113,21 +117,21 @@ app.patch('/profile/:id', (request, response, next) => {
         age = COALESCE(?,age)
         WHERE id = ?`;
 
-        let params = [data.firstname, data.lastname, data.gender, data.bio, data.age, request.params.id];
+    let params = [data.firstname, data.lastname, data.gender, data.bio, data.age, request.params.id];
 
-        db.run(sql, params, (error, result) => {
-            if (error) {
-                response.status(400).json({message: error.message});
-                return;
-            }
-            console.log(result);
+    db.run(sql, params, (error, result) => {
+        if (error) {
+            response.status(400).json({ message: error.message });
+            return;
+        }
+        console.log(result);
 
-            response.json({
-                message: 'success',
-                data: data,
-                changes: this.changes
-            });
+        response.json({
+            message: 'success',
+            data: data,
+            changes: this.changes
         });
+    });
 });
 
 app.delete('/profile/:id', (request, response, next) => {
@@ -135,11 +139,11 @@ app.delete('/profile/:id', (request, response, next) => {
 
     db.run(sql, [request.params.id], (error, row) => {
         if (error) {
-            response.status(400).json({error: error.message});
+            response.status(400).json({ error: error.message });
             return;
         }
 
-        response.json({"message":"deleted", changes: this.changes})
+        response.json({ "message": "deleted", changes: this.changes })
     });
 });
 
