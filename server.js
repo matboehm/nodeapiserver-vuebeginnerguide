@@ -38,9 +38,9 @@ app.get('/profile', (request, response, next) => {
     });
 });
 
-app.get('/profile/:name', (request, response, next) => {
-    let sql = 'SELECT * FROM profile WHERE firstname = ?';
-    let params = [request.params.name];
+app.get('/profile/:id', (request, response, next) => {
+    let sql = 'SELECT * FROM profile WHERE id = ?';
+    let params = [request.params.id];
     db.get(sql, params, (error, row) => {
         if (error) {
             response.status(400).json({error: error.message});
@@ -74,7 +74,7 @@ app.post('/profile', (request, response, next) => {
 
     let data = {
       firstname: request.body.firstname,
-      lastname: request.body.lastanme,
+      lastname: request.body.lastname,
       gender: request.body.gender,
       bio: request.body.bio,
       age: request.body.age

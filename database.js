@@ -17,18 +17,27 @@ let db = new sqlite3.Database(dbSource, (error) => {
 
     console.info('Connected to SQLite database');
 
-    db.run(`CREATE TABLE profile (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+    const createTableSql = `CREATE TABLE profile (
+        id INTEGER PRIMARY KEY ${process.env.NODE_ENV === 'test' ? 'AUTOINCREMENT' : ''},
         firstname TEXT,
         lastname TEXT,
         gender TEXT,
         bio TEXT,
         age INTEGER UNSIGNED
-    )`,
+    )`
+
+    db.run(createTableSql,
     (error) => {
         // db already exists
-        // let insert = 'INSERT INTO profile (firstname, lastname, gender, bio, age) VALUES (?,?,?,?,?)';
-        // db.run(insert, ['Hans', 'Peter', 'male', 'biography text', 44]);
+
+        // set up test db
+        if (process.env.NODE_ENV === 'test') {
+            let cleanup = 'DELETE FROM profile';
+            db.run(cleanup);
+            let insert = 'INSERT INTO profile (id, firstname, lastname, gender, bio, age) VALUES (?,?,?,?,?,?)';
+            db.run(insert, [1, 'Hans Peter', 'Baxxter', 'male', 'biography text', 44]);
+            db.run(insert, [2, 'Dieter', 'Bohlen', 'male', 'biography text', 63]);
+        }
     });
 });
 
