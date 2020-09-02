@@ -129,7 +129,6 @@ app.patch('/profile/:id', (request, response, next) => {
         response.json({
             message: 'success',
             data: data,
-            changes: this.changes
         });
     });
 });
@@ -143,7 +142,7 @@ app.delete('/profile/:id', (request, response, next) => {
             return;
         }
 
-        response.json({ "message": "deleted", changes: this.changes })
+        response.json({ "message": "deleted" })
     });
 });
 

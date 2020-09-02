@@ -1,7 +1,18 @@
 {
-  "name": "nodeapiserverprofile",
+  "name": "nodeapiserver-vuebeginnerguide",
   "version": "1.0.0",
-  "description": "",
+  "description": "A node API Server for the Vue beginner guide by Raw Coding (see YouTube)",
+  "keywords": [
+    "vue",
+    "beginner",
+    "guide",
+    "tutorial",
+    "profile",
+    "profiles",
+    "node",
+    "Node.js",
+    "API"
+  ],
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -11,8 +22,12 @@
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/matthib/nodeapiserverprofile.git"
   },
-  "author": "Matthias Böhm",
-  "license": "ISC",
+  "author": {
+    "name": "Matthias Böhm",
+    "email": "mail@matthiasboehm.com",
+    "url": "https://www.matthiasboehm.com"
+  },
+  "license": "MIT",
   "homepage": "https://bitbucket.org/matthib/nodeapiserverprofile#readme",
   "dependencies": {
     "cors": "^2.8.5",
