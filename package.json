@@ -15,7 +15,7 @@
   ],
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "test": "NODE_ENV=test mocha --exit"
   },
   "repository": {
@@ -29,6 +29,9 @@
   },
   "license": "MIT",
   "homepage": "https://bitbucket.org/matthib/nodeapiserverprofile#readme",
+  "nodemonConfig": {
+    "ignore": ["test/*"]
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -38,6 +41,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "mocha": "^8.1.3"
+    "mocha": "^8.1.3",
+    "nodemon": "^2.0.4"
   }
 }

@@ -44,7 +44,9 @@ Server running on port 3000
 Connected to SQLite database
 ```
 
-Perfect! Now the server is running `http://localhost:3000` and you can start making requests (`http://localhost:3000/profile` for a list of the profiles for example - if you have any).
+Perfect! Now the server is running `http://localhost:3000` and you can start making requests (`http://localhost:3000/profile` for a list of the profiles for example - if you have any). 
+
+The server is running with [Nodemon](https://www.npmjs.com/package/nodemon) which means it will detect if there are file changes and restart the server (very handy for development but should be turned off for production use).
 
 API Endpoints
 ===
@@ -59,7 +61,7 @@ Here are the endpoints you can access:
 | ------------- |:-------------:| -----:| -----:| -----:|
 | Server Test | GET      | / |  | { message: "Ok" } |
 | Profile List | GET      | /profile | | { [profiles] } |
-| Single Profile (by id) | GET      | /profile/:id | profile.id | { profile } |
+| Single Profile (by firstname) | GET      | /profile/:name | profile.name | { profile } |
 | Create Profile | POST      | /profile | Body: { firstname: "", lastname: "",  gender: "", bio: "", age: ""} | { profile } |
 | Update Profile (by id) | PATCH      | Parameter: /profile/:id, Body: { firstname: "", lastname: "",  gender: "", bio: "", age: ""} | profile.id | { message: "updated" } |
 | Delete Profile (by id) | DELETE      | /profile/:id | profile.id | { message: "deleted" } |

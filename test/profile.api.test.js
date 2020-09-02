@@ -40,7 +40,7 @@ describe('single profile endpoint', () => {
     it('returns a single profiles', done => {
         chai
             .request(app)
-            .get('/profile/1')
+            .get('/profile/Homer')
             .end((error, response) => {
                 expect(response).to.have.status(200);
                 expect(response.body.firstname).to.equal('Homer');
