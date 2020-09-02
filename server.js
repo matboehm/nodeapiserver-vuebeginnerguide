@@ -34,11 +34,7 @@ app.get('/profile', (request, response, next) => {
             response.status(400).json({ error: error.message });
             return;
         }
-
-        response.json({
-            message: 'success',
-            data: rows
-        });
+        response.json(rows);
     });
 });
 
@@ -51,17 +47,13 @@ app.get('/profile/:id', (request, response, next) => {
             return;
         }
 
-        response.json({
-            message: 'success',
-            data: row
-        });
+        response.json(row);
     });
 });
 
 app.post('/profile', (request, response, next) => {
     // Validation
     let errors = [];
-    console.log(request.body);
 
     if (!request.body.firstname) {
         errors.push("No first name specified");
@@ -92,11 +84,9 @@ app.post('/profile', (request, response, next) => {
             return;
         }
 
-        response.json({
-            message: 'success',
-            data: data,
-            id: this.lastId
-        });
+        data.id = this.lastId
+
+        response.json(data);
     });
 });
 
@@ -124,12 +114,8 @@ app.patch('/profile/:id', (request, response, next) => {
             response.status(400).json({ message: error.message });
             return;
         }
-        console.log(result);
 
-        response.json({
-            message: 'success',
-            data: data,
-        });
+        response.json({ "message": "updated" });
     });
 });
 

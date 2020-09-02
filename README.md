@@ -58,12 +58,11 @@ Here are the endpoints you can access:
 |Description | HTTP Method | Endpoint | Parameter / Body  | Response |
 | ------------- |:-------------:| -----:| -----:| -----:|
 | Server Test | GET      | / |  | { message: "Ok" } |
-| Profile List | GET      | /profile | | { data: profiles } |
-| Single Profile (by id) | GET      | /profile/:id | profile.id | { data: profile } |
-| Single Profile (by id) | GET      | /profile/:id | profile.id | { data: profile } |
-| Create Profile | POST      | /profile | Body: { firstname: "", lastname: "",  gender: "", bio: "", age: ""} | { data: profile, id: profile.id } |
-| Update Profile (by id) | PATCH      | Parameter: /profile/:id, Body: { firstname: "", lastname: "",  gender: "", bio: "", age: ""} | profile.id | { data: profile, changes: changes } |
-| Delete Profile (by id) | DELETE      | /profile/:id | profile.id | { message: "Deleted" } |
+| Profile List | GET      | /profile | | { [profiles] } |
+| Single Profile (by id) | GET      | /profile/:id | profile.id | { profile } |
+| Create Profile | POST      | /profile | Body: { firstname: "", lastname: "",  gender: "", bio: "", age: ""} | { profile } |
+| Update Profile (by id) | PATCH      | Parameter: /profile/:id, Body: { firstname: "", lastname: "",  gender: "", bio: "", age: ""} | profile.id | { message: "updated" } |
+| Delete Profile (by id) | DELETE      | /profile/:id | profile.id | { message: "deleted" } |
 
 Bugs & Contributions
 ===

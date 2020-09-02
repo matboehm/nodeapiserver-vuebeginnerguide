@@ -35,8 +35,8 @@ let db = new sqlite3.Database(dbSource, (error) => {
             let cleanup = 'DELETE FROM profile';
             db.run(cleanup);
             let insert = 'INSERT INTO profile (id, firstname, lastname, gender, bio, age) VALUES (?,?,?,?,?,?)';
-            db.run(insert, [1, 'Hans Peter', 'Baxxter', 'male', 'biography text', 44]);
-            db.run(insert, [2, 'Dieter', 'Bohlen', 'male', 'biography text', 63]);
+            db.run(insert, [1, 'Homer', 'Simpson', 'male', 'biography text', 44]);
+            db.run(insert, [2, 'Marge', 'Simpson', 'female', 'biography text 2', 41]);
         }
     });
 });

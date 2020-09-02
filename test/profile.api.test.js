@@ -25,12 +25,12 @@ describe('profile list endpoint', () => {
             .get('/profile')
             .end((error, response) => {
                 expect(response).to.have.status(200);
-                expect(response.body.data).to.have.lengthOf(2);
-                expect(response.body.data[0].firstname).to.equal('Hans Peter');
-                expect(response.body.data[0].lastname).to.equal('Baxxter');
-                expect(response.body.data[0].gender).to.equal('male');
-                expect(response.body.data[0].bio).to.equal('biography text');
-                expect(response.body.data[0].age).to.equal(44);
+                expect(response.body).to.have.lengthOf(2);
+                expect(response.body[0].firstname).to.equal('Homer');
+                expect(response.body[0].lastname).to.equal('Simpson');
+                expect(response.body[0].gender).to.equal('male');
+                expect(response.body[0].bio).to.equal('biography text');
+                expect(response.body[0].age).to.equal(44);
                 done();
             });
     })
@@ -43,11 +43,11 @@ describe('single profile endpoint', () => {
             .get('/profile/1')
             .end((error, response) => {
                 expect(response).to.have.status(200);
-                expect(response.body.data.firstname).to.equal('Hans Peter');
-                expect(response.body.data.lastname).to.equal('Baxxter');
-                expect(response.body.data.gender).to.equal('male');
-                expect(response.body.data.bio).to.equal('biography text');
-                expect(response.body.data.age).to.equal(44);
+                expect(response.body.firstname).to.equal('Homer');
+                expect(response.body.lastname).to.equal('Simpson');
+                expect(response.body.gender).to.equal('male');
+                expect(response.body.bio).to.equal('biography text');
+                expect(response.body.age).to.equal(44);
                 done();
             });
     })
@@ -69,12 +69,11 @@ describe('create profile endpoint', () => {
             .send(profile)
             .end((error, response) => {
                 expect(response).to.have.status(200);
-                expect(response.body.message).to.equal('success');
-                expect(response.body.data.firstname).to.equal(profile.firstname);
-                expect(response.body.data.lastname).to.equal(profile.lastname);
-                expect(response.body.data.gender).to.equal(profile.gender);
-                expect(response.body.data.bio).to.equal(profile.bio);
-                expect(response.body.data.age).to.equal(profile.age);
+                expect(response.body.firstname).to.equal(profile.firstname);
+                expect(response.body.lastname).to.equal(profile.lastname);
+                expect(response.body.gender).to.equal(profile.gender);
+                expect(response.body.bio).to.equal(profile.bio);
+                expect(response.body.age).to.equal(profile.age);
                 done();
             });
     })
@@ -92,9 +91,7 @@ describe('update profile endpoint', () => {
             .send(profileUpdate)
             .end((error, response) => {
                 expect(response).to.have.status(200);
-                expect(response.body.message).to.equal('success');
-                expect(response.body.data.age).to.equal(profileUpdate.age);
-                expect(response.body.data.firstname).to.equal(undefined);
+                expect(response.body.message).to.equal('updated');
                 done();
             });
     })
