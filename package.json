@@ -1,6 +1,6 @@
 {
   "name": "nodeapiserver-vuebeginnerguide",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A node API Server for the Vue beginner guide by Raw Coding (see YouTube)",
   "keywords": [
     "vue",
